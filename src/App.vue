@@ -5,6 +5,9 @@
       <provide-code></provide-code>
     </div>
     <novel-text-show></novel-text-show>
+    <el-backtop :bottom="100" :right="100">
+      <i class="el-icon-caret-top"></i>
+    </el-backtop>
   </div>
 </template>
 <script>
@@ -12,9 +15,6 @@ import novelText from './views/novelText'
 import provideCode from './views/provideCode'
 import novelTextShow from './views/novelTextShow'
 export default {
-  data () {
-    return {}
-  },
   components: {
     novelText,
     provideCode,
@@ -23,10 +23,14 @@ export default {
 }
 </script>
 <style lang="scss">
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 16px;
+}
 html,
 body,
-div ,
-span{
+div,
+span {
   margin: 0;
   padding: 0;
 }

@@ -5,16 +5,22 @@
       <el-color-picker v-model="colorh"></el-color-picker>
       <span>段落颜色:</span>
       <el-color-picker v-model="colorp"></el-color-picker>
-
-      <el-select v-model="value" placeholder="请选择" clearable>
+      <el-select v-model="valueH" placeholder="标题字体大小" clearable size="mini">
         <el-option
-          v-for="item in options"
+          v-for="item in fontSizeH"
           :key="item.value"
           :label="item.label"
           :value="item.value"
         ></el-option>
       </el-select>
-
+      <el-select v-model="valueP" placeholder="段落字体大小" clearable size="mini">
+        <el-option
+          v-for="item in fontSizeP"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
+      </el-select>
       <el-input
         type="textarea"
         :autosize="{ minRows: 8, maxRows: 8}"
@@ -22,6 +28,7 @@
         v-model="intputNovelText"
         resize="none"
       ></el-input>
+      <el-button type="defause" @click="cleanText(intputNovelText)">清除</el-button>
       <el-button type="defause" @click="editNovelText(intputNovelText)">编辑</el-button>
     </div>
   </div>
@@ -30,10 +37,10 @@
 export default {
   data () {
     return {
-      colorh: '#FE4E03',
-      colorp: '#26201D',
+      colorh: '#A63403',
+      colorp: '#1e1e1e',
       intputNovelText: '',
-      options: [
+      fontSizeH: [
         {
           value: '14px',
           label: '14px'
@@ -51,30 +58,58 @@ export default {
           label: '20px'
         },
         {
-          value: '24px',
-          label: '24px'
+          value: '22px',
+          label: '22px'
         }
       ],
-      value: ''
+      valueH: '',
+      fontSizeP: [
+        {
+          value: '12px',
+          label: '12px'
+        },
+        {
+          value: '14px',
+          label: '14px'
+        },
+        {
+          value: '16px',
+          label: '16px'
+        },
+        {
+          value: '18px',
+          label: '18px'
+        },
+        {
+          value: '20px',
+          label: '20px'
+        }
+      ],
+      valueP: ''
     }
   },
   methods: {
+    cleanText () {
+      this.intputNovelText = ''
+    },
     editNovelText (text) {
-      this.$store.dispatch('getText', text)
+      this.$store.dispatch('getText', this.editText(text))
     },
     editText () {
-      var novelTextContent = ''
-      var novelTextArr = intputNovelText.split('\n')
-      novelTextArr.forEach(function (item) {
+      let style = `<style>#content-novel h6{font-size:${this.valueH == 0 ? '18px' : this.valueH};text-align:center;color:${this.colorh};}#content-novel p{font-size:${this.valueP == 0 ? '16px' : this.valueH};line-height:2em;text-indent:2em;color:${this.colorp};margin:0;padding:0}</style>`
+      let novelTextContent = ''
+      let novelTextArr = this.intputNovelText.split('\n')
+      novelTextArr.forEach((item) => {
         let it = item.trim()
         if (it !== '') {
-          if (/^第[Ww]*章/.text(it)) {
+          if (/^第[\W\w]*章/.test(it)) {
             novelTextContent += `<h6>${it}</h6>`
           } else {
             novelTextContent += `<p>${it}</p>`
           }
         }
       })
+      return novelTextContent == '' ? '' : `<div id="content-novel">${style + novelTextContent}</div>`
     }
   }
 }
@@ -83,6 +118,6 @@ export default {
 .novelText {
   width: 50%;
   margin-right: 2px;
-  height: 500px;
+  // height: 250px;
 }
 </style>
