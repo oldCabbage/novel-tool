@@ -1,5 +1,3 @@
-# novel-tool
-
 ## Project setup
 ```
 npm install

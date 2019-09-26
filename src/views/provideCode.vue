@@ -72,6 +72,5 @@ export default {
 .novelCode {
   margin-left: 2px;
   width: 50%;
-  height: 10px;
 }
 </style>

@@ -88,14 +88,30 @@ export default {
       valueP: ''
     }
   },
+  created: function () {
+    this.getcolor()
+  },
   methods: {
+    setcolor () {
+      let color = { colorh: this.colorh, colorp: this.colorp }
+      localStorage.setItem('novel-color', JSON.stringify(color))
+    },
+    getcolor () {
+      let color = localStorage.getItem('novel-color')
+      if (!color) return
+      color = JSON.parse(color)
+      this.colorh = color.colorh
+      this.colorp = color.colorp
+    },
     cleanText () {
       this.intputNovelText = ''
     },
     editNovelText (text) {
+      this.setcolor()
       this.$store.dispatch('getText', this.editText(text))
     },
     editText () {
+      // if(location.host !== 'oldcabbage.net3v.net') return ;
       let style = `<style>#content-novel h6{font-size:${this.valueH == 0 ? '18px' : this.valueH};text-align:center;color:${this.colorh};}#content-novel p{font-size:${this.valueP == 0 ? '16px' : this.valueH};line-height:2em;text-indent:2em;color:${this.colorp};margin:0;padding:0}</style>`
       let novelTextContent = ''
       let novelTextArr = this.intputNovelText.split('\n')
@@ -118,6 +134,5 @@ export default {
 .novelText {
   width: 50%;
   margin-right: 2px;
-  // height: 250px;
 }
 </style>
