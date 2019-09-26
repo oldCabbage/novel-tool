@@ -112,7 +112,7 @@ export default {
     },
     editText () {
       // if(location.host !== 'oldcabbage.net3v.net') return ;
-      let style = `<style>#content-novel h6{font-size:${this.valueH == 0 ? '18px' : this.valueH};text-align:center;color:${this.colorh};}#content-novel p{font-size:${this.valueP == 0 ? '16px' : this.valueH};line-height:2em;text-indent:2em;color:${this.colorp};margin:0;padding:0}</style>`
+      let style = `<style>#content-novel h6{font-size:${this.valueH == 0 ? '18px' : this.valueH};text-align:center;color:${this.colorh};}#content-novel p{font-size:${this.valueP == 0 ? '16px' : this.valueP};line-height:2em;text-indent:2em;color:${this.colorp};margin:0;padding:0}</style>`
       let novelTextContent = ''
       let novelTextArr = this.intputNovelText.split('\n')
       novelTextArr.forEach((item) => {
