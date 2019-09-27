@@ -13,9 +13,9 @@ import {
   Icon,
   Backtop
 } from 'element-ui'
-// if (location.host !== 'oldcabbage.net3v.net') {
-//   window.location.href = 'http://oldcabbage.net3v.net/'
-// }
+if (location.host !== 'oldcabbage.net3v.net') {
+  window.location.href = 'http://oldcabbage.net3v.net/novel-tool/index.html'
+};
 Vue.use(ColorPicker)
 Vue.use(Input)
 Vue.use(Button)
